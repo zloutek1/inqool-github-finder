@@ -1,6 +1,7 @@
 {
   "name": "inqool-github-finder",
   "version": "0.1.0",
+  "homepage": "https://zloutek1.github.io/inqool-github-finder",
   "private": true,
   "dependencies": {
     "@emotion/react": "^11.10.4",
@@ -28,6 +29,8 @@
     "build": "react-scripts build",
     "start": "react-scripts start",
     "test": "react-scripts test",
+    "predeploy": "yarn build",
+    "deploy": "gh-pages -d build",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
@@ -51,6 +54,7 @@
   "devDependencies": {
     "eslint": "^8.26.0",
     "eslint-config-airbnb": "19.0.4",
-    "eslint-config-airbnb-typescript": "^17.0.0"
+    "eslint-config-airbnb-typescript": "^17.0.0",
+    "gh-pages": "^4.0.0"
   }
 }
