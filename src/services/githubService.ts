@@ -138,7 +138,7 @@ type UserReposReponse = GithubRepo[];
 const getRepos = async (username: string) => {
   const resp = await api.get<UserReposReponse>(`/users/${username}/repos`);
   if (resp.status !== 200) {
-    return Promise.reject(resp.statusText);
+    return Promise.reject(resp.data);
   }
   return resp.data as UserReposReponse;
 }
@@ -163,7 +163,7 @@ type UserOrgsReponse = GithubOrg[];
 const getOrgs = async (username: string) => {
   const resp = await api.get<UserOrgsReponse>(`/users/${username}/orgs`);
   if (resp.status !== 200) {
-    return Promise.reject(resp.statusText);
+    return Promise.reject(resp.data);
   }
   return resp.data as UserOrgsReponse;
 }
