@@ -3,13 +3,13 @@ import React from 'react';
 import useGithubSearch from '../../hooks/useGithubSearch';
 import Organisations from './Organisations';
 import Repositories from './Repositories';
-import UserDetails from './UserDetails';
+import GithubDetails from '../../components/GithubDetails';
 
 const ProfilePage = () => {
   const { autocomplete: GithubSearch, user } = useGithubSearch();
 
   return (
-    <Container sx={{ marginTop: '1em' }}>
+    <Container sx={{ margin: '2em auto' }}>
       <Grid
         container
         spacing={0}
@@ -19,7 +19,7 @@ const ProfilePage = () => {
         <Grid item xs={6}>{GithubSearch}</Grid>
         {user !== null && (
           <>
-            <Grid item xs={6}><UserDetails user={user} /></Grid>
+            <Grid item xs={6}><GithubDetails user={user} /></Grid>
             <Repositories username={user.login} />
           </>
         )}

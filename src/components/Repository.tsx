@@ -1,5 +1,5 @@
 import {
-  Paper, Chip, Stack, Typography,
+  Chip, Stack, Typography,
 } from '@mui/material';
 import React from 'react';
 import StarIcon from '@mui/icons-material/Star';

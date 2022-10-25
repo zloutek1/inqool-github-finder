@@ -29,6 +29,14 @@ const Repositories = ({ username }: Props) => {
       <TableContainer component={Paper}>
         <Table sx={{ minWidth: 650 }} size="small">
           <TableBody>
+            {repos.length === 0 && (
+              <TableRow>
+                <TableCell>
+                  <div style={{ textAlign: 'center', width: '100%' }}>No organisations</div>
+                </TableCell>
+              </TableRow>
+            )}
+
             {repos.map((repo: GithubRepo) => (
               <TableRow key={repo.name}>
                 <TableCell>
