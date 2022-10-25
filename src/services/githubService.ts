@@ -4,6 +4,32 @@ const api = axios.create({
   baseURL: 'https://api.github.com/'
 });
 
+const searchUsers = async (query: string) => {
+  const resp = await api.get<SearchUsersResponse>(`/search/users?q=${query}`);
+  if (resp.status !== 200) {
+    return Promise.reject(resp.data);
+  }
+  return resp.data as SearchUsersResponse;
+}
+
+const getRepos = async (username: string) => {
+  const resp = await api.get<UserReposReponse>(`/users/${username}/repos`);
+  if (resp.status !== 200) {
+    return Promise.reject(resp.data);
+  }
+  return resp.data as UserReposReponse;
+}
+
+const getOrgs = async (username: string) => {
+  const resp = await api.get<UserOrgsReponse>(`/users/${username}/orgs`);
+  if (resp.status !== 200) {
+    return Promise.reject(resp.data);
+  }
+  return resp.data as UserOrgsReponse;
+}
+
+export { searchUsers, getRepos, getOrgs };
+
 export type GithubUser = {
   login: string
   id: number
@@ -43,14 +69,6 @@ type SearchUsersResponse = {
   total_count: number,
   inclomplete_results: boolean,
   items: GithubUser[]
-}
-
-const searchUsers = async (query: string) => {
-  const resp = await api.get<SearchUsersResponse>(`/search/users?q=${query}`);
-  if (resp.status !== 200) {
-    return Promise.reject(resp.data);
-  }
-  return resp.data as SearchUsersResponse;
 }
 
 export type GithubRepo = {
@@ -135,14 +153,6 @@ export type GithubRepo = {
 
 type UserReposReponse = GithubRepo[];
 
-const getRepos = async (username: string) => {
-  const resp = await api.get<UserReposReponse>(`/users/${username}/repos`);
-  if (resp.status !== 200) {
-    return Promise.reject(resp.data);
-  }
-  return resp.data as UserReposReponse;
-}
-
 export type GithubOrg = {
   login: string,
   id: number,
@@ -159,13 +169,3 @@ export type GithubOrg = {
 };
 
 type UserOrgsReponse = GithubOrg[];
-
-const getOrgs = async (username: string) => {
-  const resp = await api.get<UserOrgsReponse>(`/users/${username}/orgs`);
-  if (resp.status !== 200) {
-    return Promise.reject(resp.data);
-  }
-  return resp.data as UserOrgsReponse;
-}
-
-export { searchUsers, getRepos, getOrgs };
