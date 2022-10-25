@@ -9,6 +9,7 @@ const useGithubSearch = () => {
 
   const [inputValue, setInputValue] = useState<string>('');
   const [options, setOptions] = useState<GithubUser[]>([]);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     if (inputValue === '') return;
@@ -17,9 +18,8 @@ const useGithubSearch = () => {
       .then((value) => {
         setOptions(value.items);
       })
-      .catch((e) => {
-        // eslint-disable-next-line no-console
-        console.error(e);
+      .catch((e: string) => {
+        setError(e);
       });
   }, [inputValue]);
 
@@ -46,7 +46,7 @@ const useGithubSearch = () => {
       renderInput={(params) => (
         <TextField
           {...params}
-          label="Asynchronous"
+          label="Github username"
           InputProps={{
             ...params.InputProps,
             endAdornment: (
@@ -63,7 +63,14 @@ const useGithubSearch = () => {
     />
   );
 
-  return { autocomplete, data: options };
+  const elem = (
+    <>
+      {autocomplete}
+      {error !== null && <span>{error}</span>}
+    </>
+  );
+
+  return { autocomplete: elem, data: options };
 };
 
 export default useGithubSearch;
