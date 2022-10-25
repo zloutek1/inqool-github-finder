@@ -10,17 +10,27 @@ const useGithubSearch = () => {
   const [options, setOptions] = useState<readonly GithubUser[]>([]);
   const [error, setError] = useState<string | null>(null);
 
+  const [timerId, setTimerId] = useState<NodeJS.Timeout | undefined>();
+  const throttle = (fn: () => void) => {
+    clearTimeout(timerId);
+
+    const newTimerId = setTimeout(fn, 200);
+    setTimerId(newTimerId);
+  };
+
   useEffect(() => {
     if (inputValue === '') return;
-
-    searchUsers(inputValue)
-      .then((value) => {
-        setOptions(value.items);
-        setError(null);
-      })
-      .catch((e) => {
-        setError((e as { message: string }).message);
-      });
+    throttle(
+      () => searchUsers(inputValue)
+        .then((value) => {
+          setOptions(value.items);
+          setError(null);
+        })
+        .catch((e) => {
+          setError((e as { message: string }).message);
+        }),
+    );
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [inputValue]);
 
   const autocomplete = (
