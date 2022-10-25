@@ -11,7 +11,7 @@ type Props = {
 };
 
 const Repository = ({ repo }: Props) => (
-  <Paper square sx={{ padding: '.5em' }}>
+  <>
     <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
       {repo.name}
     </Typography>
@@ -23,7 +23,7 @@ const Repository = ({ repo }: Props) => (
       <Chip icon={<StarIcon fontSize="small" />} label={repo.stargazers_count} variant="outlined" />
       <Chip icon={<ForkRightIcon fontSize="small" />} label={repo.forks_count} variant="outlined" />
     </Stack>
-  </Paper>
+  </>
 );
 
 export default Repository;

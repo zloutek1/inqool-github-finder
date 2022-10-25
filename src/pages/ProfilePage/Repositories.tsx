@@ -1,5 +1,5 @@
 import {
-  Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow,
+  Paper, Table, TableBody, TableCell, TableContainer, TableRow,
 } from '@mui/material';
 import React, { useEffect, useState } from 'react';
 import Repository from '../../components/Repository';
@@ -30,7 +30,11 @@ const Repositories = ({ username }: Props) => {
         <Table sx={{ minWidth: 650 }} size="small">
           <TableBody>
             {repos.map((repo: GithubRepo) => (
-              <Repository repo={repo} key={repo.name} />
+              <TableRow key={repo.name}>
+                <TableCell>
+                  <Repository repo={repo} />
+                </TableCell>
+              </TableRow>
             ))}
           </TableBody>
         </Table>
