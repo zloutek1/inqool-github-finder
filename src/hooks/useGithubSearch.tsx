@@ -1,12 +1,10 @@
 import {
-  Autocomplete, Box, CircularProgress, TextField,
+  Autocomplete, Box, TextField,
 } from '@mui/material';
 import React, { useEffect, useState } from 'react';
 import { GithubUser, searchUsers } from '../services/githubService';
 
 const useGithubSearch = () => {
-  const isLoading = false;
-
   const [user, setUser] = React.useState<GithubUser | null>(null);
   const [inputValue, setInputValue] = useState<string>('');
   const [options, setOptions] = useState<readonly GithubUser[]>([]);
@@ -34,7 +32,7 @@ const useGithubSearch = () => {
       onInputChange={(event, newInputValue) => {
         setInputValue(newInputValue);
       }}
-      onChange={(event: any, newValue: GithubUser | null) => {
+      onChange={(event, newValue: GithubUser | null) => {
         setOptions(newValue ? [newValue, ...options] : options);
         setUser(newValue);
       }}

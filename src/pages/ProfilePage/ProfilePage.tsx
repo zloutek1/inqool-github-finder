@@ -21,6 +21,7 @@ const ProfilePage = () => {
           <>
             <Grid item xs={6}><GithubDetails user={user} /></Grid>
             <Repositories username={user.login} />
+            <Organisations username={user.login} />
           </>
         )}
       </Grid>
