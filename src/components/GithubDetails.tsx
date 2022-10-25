@@ -18,7 +18,7 @@ const GithubDetails = ({ user, org }: Props) => {
   const login = user !== undefined ? user.login : org.login;
   const avatarUrl = user !== undefined ? user.avatar_url : org.avatar_url;
   const description = user !== undefined ? user.bio : org.description;
-  const learnMoreUrl = user !== undefined ? user.html_url : org.url;
+  const learnMoreUrl = user !== undefined ? user.html_url : `https://github.com/${org.login}`;
 
   return (
     <Box

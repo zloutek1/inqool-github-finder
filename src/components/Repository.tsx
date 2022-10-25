@@ -1,4 +1,5 @@
 import {
+  Button,
   Chip, Stack, Typography,
 } from '@mui/material';
 import React from 'react';
@@ -23,6 +24,7 @@ const Repository = ({ repo }: Props) => (
       <Chip icon={<StarIcon fontSize="small" />} label={repo.stargazers_count} variant="outlined" />
       <Chip icon={<ForkRightIcon fontSize="small" />} label={repo.forks_count} variant="outlined" />
     </Stack>
+    <Button href={repo.html_url} size="small">Learn More</Button>
   </>
 );
 
