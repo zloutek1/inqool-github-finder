@@ -20,9 +20,10 @@ const Organisations = ({ username }: Props) => {
       })
       .catch((e) => {
         setError((e as { message: string }).message);
+      })
+      .finally(() => {
+        setLoading(false);
       });
-
-    setLoading(false);
   }, [username]);
 
   return (
@@ -34,7 +35,7 @@ const Organisations = ({ username }: Props) => {
         {!loading && orgs.length === 0 && <div style={{ textAlign: 'center', width: '100%' }}>No organisations</div>}
 
         {orgs.map((org) => (
-          <Grid item key={org.login}>
+          <Grid item key={org.id}>
             <GithubDetails org={org} />
           </Grid>
         ))}

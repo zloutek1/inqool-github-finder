@@ -19,7 +19,7 @@ const Repository = ({ repo }: Props) => (
     <Typography variant="body2">
       {repo.description}
     </Typography>
-    <Stack direction="row" spacing={2}>
+    <Stack direction="row" spacing={0.5} style={{ margin: '.5em 0' }}>
       {repo.topics.map((topic) => <Chip key={topic} label={topic} />)}
       <Chip icon={<StarIcon fontSize="small" />} label={repo.stargazers_count} variant="outlined" />
       <Chip icon={<ForkRightIcon fontSize="small" />} label={repo.forks_count} variant="outlined" />
