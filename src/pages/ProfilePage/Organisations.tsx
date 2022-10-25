@@ -1,4 +1,4 @@
-import { Grid } from '@mui/material';
+import { CircularProgress, Grid } from '@mui/material';
 import React, { useEffect, useState } from 'react';
 import GithubDetails from '../../components/GithubDetails';
 import { getOrgs, GithubOrg } from '../../services/githubService';
@@ -9,26 +9,28 @@ type Props = {
 
 const Organisations = ({ username }: Props) => {
   const [orgs, setOrgs] = useState<GithubOrg[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     getOrgs(username)
       .then((value: GithubOrg[]) => {
         setOrgs(value);
+        setError(null);
       })
       .catch((e) => {
-        // eslint-disable-next-line no-console
-        console.error(e);
+        setError((e as { message: string }).message);
       });
-  }, [username]);
 
-  // eslint-disable-next-line no-console
-  console.log(orgs);
+    setLoading(false);
+  }, [username]);
 
   return (
     <>
       <h1>Organisations</h1>
       <Grid container spacing={1}>
-        {orgs.length === 0 && <div style={{ textAlign: 'center', width: '100%' }}>No organisations</div>}
+        {loading && <div style={{ textAlign: 'center', width: '100%' }}><CircularProgress color="inherit" size={20} /></div>}
+        {!loading && orgs.length === 0 && <div style={{ textAlign: 'center', width: '100%' }}>No organisations</div>}
 
         {orgs.map((org) => (
           <Grid item key={org.login}>

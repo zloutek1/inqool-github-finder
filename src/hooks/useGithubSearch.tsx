@@ -16,9 +16,10 @@ const useGithubSearch = () => {
     searchUsers(inputValue)
       .then((value) => {
         setOptions(value.items);
+        setError(null);
       })
-      .catch((e: string) => {
-        setError(e);
+      .catch((e) => {
+        setError((e as { message: string }).message);
       });
   }, [inputValue]);
 
@@ -56,8 +57,8 @@ const useGithubSearch = () => {
 
   const elem = (
     <>
+      {error !== null && <span style={{ color: 'red' }}>{error}</span>}
       {autocomplete}
-      {error !== null && <span>{error}</span>}
     </>
   );
 

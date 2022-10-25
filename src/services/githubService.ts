@@ -48,7 +48,7 @@ type SearchUsersResponse = {
 const searchUsers = async (query: string) => {
   const resp = await api.get<SearchUsersResponse>(`/search/users?q=${query}`);
   if (resp.status !== 200) {
-    return Promise.reject(resp.statusText);
+    return Promise.reject(resp.data);
   }
   return resp.data as SearchUsersResponse;
 }
