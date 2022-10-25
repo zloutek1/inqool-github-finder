@@ -1,7 +1,7 @@
-import axios from "axios";
+import axios from 'axios';
 
 const api = axios.create({
-  baseURL: "https://api.github.com/" 
+  baseURL: 'http://api.github.com/'
 });
 
 export type GithubUser = {
@@ -50,7 +50,7 @@ const searchUsers = async (query: string) => {
   if (resp.status !== 200) {
     return Promise.reject(resp.statusText);
   }
-  return resp.data;
+  return resp.data as SearchUsersResponse;
 }
 
 export type GithubRepo = {
@@ -140,15 +140,32 @@ const getRepos = async (username: string) => {
   if (resp.status !== 200) {
     return Promise.reject(resp.statusText);
   }
-  return resp.data;
+  return resp.data as UserReposReponse;
 }
 
-const getCorps = async (username: string) => {
-  const resp = await api.get(`/users/${username}/corps`);
+export type GithubOrg = {
+  login: string,
+  id: number,
+  node_id: string,
+  url: string,
+  repos_url: string,
+  events_url: string,
+  hooks_url: string,
+  issues_url: string,
+  members_url: string,
+  public_members_url: string,
+  avatar_url: string,
+  description: string
+};
+
+type UserOrgsReponse = GithubOrg[];
+
+const getOrgs = async (username: string) => {
+  const resp = await api.get<UserOrgsReponse>(`/users/${username}/orgs`);
   if (resp.status !== 200) {
     return Promise.reject(resp.statusText);
   }
-  return resp.data;
+  return resp.data as UserOrgsReponse;
 }
 
-export { searchUsers, getRepos, getCorps };
+export { searchUsers, getRepos, getOrgs };
