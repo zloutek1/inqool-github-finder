@@ -1,11 +1,12 @@
 import { Container, Grid } from '@mui/material';
 import React from 'react';
 import useGithubSearch from '../../hooks/useGithubSearch';
+import Organisations from './Organisations';
 import Repositories from './Repositories';
 import UserDetails from './UserDetails';
 
 const ProfilePage = () => {
-  const { autocomplete: GithubSearch, data } = useGithubSearch();
+  const { autocomplete: GithubSearch, user } = useGithubSearch();
 
   return (
     <Container sx={{ marginTop: '1em' }}>
@@ -16,10 +17,10 @@ const ProfilePage = () => {
         alignItems="center"
       >
         <Grid item xs={6}>{GithubSearch}</Grid>
-        {data.length === 1 && (
+        {user !== null && (
           <>
-            <Grid item xs={6}><UserDetails user={data[0]} /></Grid>
-            <Repositories username={data[0].login} />
+            <Grid item xs={6}><UserDetails user={user} /></Grid>
+            <Repositories username={user.login} />
           </>
         )}
       </Grid>

@@ -7,8 +7,9 @@ import { GithubUser, searchUsers } from '../services/githubService';
 const useGithubSearch = () => {
   const isLoading = false;
 
+  const [user, setUser] = React.useState<GithubUser | null>(null);
   const [inputValue, setInputValue] = useState<string>('');
-  const [options, setOptions] = useState<GithubUser[]>([]);
+  const [options, setOptions] = useState<readonly GithubUser[]>([]);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
@@ -27,10 +28,19 @@ const useGithubSearch = () => {
     <Autocomplete
       autoComplete
       sx={{ width: 300 }}
+      options={options}
+      getOptionLabel={(option) => option.login}
+      isOptionEqualToValue={(option, value) => option.id === value.id}
       onInputChange={(event, newInputValue) => {
         setInputValue(newInputValue);
       }}
-      getOptionLabel={(option) => option.login}
+      onChange={(event: any, newValue: GithubUser | null) => {
+        setOptions(newValue ? [newValue, ...options] : options);
+        setUser(newValue);
+      }}
+      renderInput={(params) => (
+        <TextField {...params} label="Github username" fullWidth />
+      )}
       renderOption={(props, option) => (
         <Box component="li" sx={{ '& > img': { mr: 2, flexShrink: 0 } }} {...props}>
           <img
@@ -43,23 +53,6 @@ const useGithubSearch = () => {
           {option.login}
         </Box>
       )}
-      renderInput={(params) => (
-        <TextField
-          {...params}
-          label="Github username"
-          InputProps={{
-            ...params.InputProps,
-            endAdornment: (
-              <>
-                {isLoading ? <CircularProgress color="inherit" size={20} /> : null}
-                {params.InputProps.endAdornment}
-              </>
-            ),
-          }}
-        />
-      )}
-      isOptionEqualToValue={(option, value) => option.login === value.login}
-      options={options}
     />
   );
 
@@ -70,7 +63,7 @@ const useGithubSearch = () => {
     </>
   );
 
-  return { autocomplete: elem, data: options };
+  return { autocomplete: elem, user };
 };
 
 export default useGithubSearch;
