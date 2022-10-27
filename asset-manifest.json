@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/inqool-github-finder/static/css/main.e6c13ad2.css",
-    "main.js": "/inqool-github-finder/static/js/main.a49257b2.js",
+    "main.js": "/inqool-github-finder/static/js/main.8d42dce2.js",
     "static/js/787.bf3a25b4.chunk.js": "/inqool-github-finder/static/js/787.bf3a25b4.chunk.js",
     "index.html": "/inqool-github-finder/index.html",
     "main.e6c13ad2.css.map": "/inqool-github-finder/static/css/main.e6c13ad2.css.map",
-    "main.a49257b2.js.map": "/inqool-github-finder/static/js/main.a49257b2.js.map",
+    "main.8d42dce2.js.map": "/inqool-github-finder/static/js/main.8d42dce2.js.map",
     "787.bf3a25b4.chunk.js.map": "/inqool-github-finder/static/js/787.bf3a25b4.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.e6c13ad2.css",
-    "static/js/main.a49257b2.js"
+    "static/js/main.8d42dce2.js"
   ]
 }
