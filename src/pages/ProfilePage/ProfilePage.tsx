@@ -1,7 +1,7 @@
 import { Container, Grid } from '@mui/material';
 import React from 'react';
 import useGithubSearch from '../../hooks/useGithubSearch';
-import Organisations from './Organisations';
+import Organizations from './Organizations';
 import Repositories from './Repositories';
 import GithubDetails from '../../components/GithubDetails';
 
@@ -21,7 +21,7 @@ const ProfilePage = () => {
           <>
             <Grid item xs={6}><GithubDetails user={user} /></Grid>
             <Repositories username={user.login} />
-            <Organisations username={user.login} />
+            <Organizations username={user.login} />
           </>
         )}
       </Grid>

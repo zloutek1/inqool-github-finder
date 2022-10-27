@@ -7,7 +7,7 @@ type Props = {
   username: string,
 };
 
-const Organisations = ({ username }: Props) => {
+const Organizations = ({ username }: Props) => {
   const [orgs, setOrgs] = useState<GithubOrg[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -28,7 +28,7 @@ const Organisations = ({ username }: Props) => {
 
   return (
     <>
-      <h1>Organisations</h1>
+      <h1>Organizations</h1>
       <Grid container spacing={1}>
         {error !== null && <span style={{ color: 'red' }}>{error}</span>}
         {loading && <div style={{ textAlign: 'center', width: '100%' }}><CircularProgress color="inherit" size={20} /></div>}
@@ -44,4 +44,4 @@ const Organisations = ({ username }: Props) => {
   );
 };
 
-export default Organisations;
+export default Organizations;
