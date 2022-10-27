@@ -32,7 +32,7 @@ const Organizations = ({ username }: Props) => {
       <Grid container spacing={1}>
         {error !== null && <span style={{ color: 'red' }}>{error}</span>}
         {loading && <div style={{ textAlign: 'center', width: '100%' }}><CircularProgress color="inherit" size={20} /></div>}
-        {!loading && orgs.length === 0 && <div style={{ textAlign: 'center', width: '100%' }}>No organisations</div>}
+        {!loading && orgs.length === 0 && <div style={{ textAlign: 'center', width: '100%' }}>No organizations</div>}
 
         {orgs.map((org) => (
           <Grid item key={org.id}>
